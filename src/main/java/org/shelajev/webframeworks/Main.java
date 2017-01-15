@@ -1,5 +1,7 @@
 package org.shelajev.webframeworks;
 
+import spark.Request;
+
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -44,6 +46,13 @@ public class Main {
         }
         return sb.toString();
     }
+
+    public static String getPath(Request request){
+        String rc=request.params(":path");
+        for(int i=0;i<10;i++)rc=rc.replace("_","/");
+        return rc;
+    }
+
 
     public static String readFile(String file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
