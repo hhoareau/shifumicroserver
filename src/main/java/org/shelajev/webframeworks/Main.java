@@ -16,9 +16,7 @@ import java.util.Properties;
 
 public class Main {
     private static final String charset = "UTF-8";
-    private static final String API_ROOT = "_ah/api/ficarbar/v1";
-
-    private static final String DOMAIN = "https://shifumixweb.appspot.com";
+    private static final String API_ROOT = "_ah/api/shifumix/v1";
     private static final String DIRECTORY = "/home/pi/workspace/Mails";
 
     // convert InputStream to String
@@ -49,7 +47,7 @@ public class Main {
 
     public static String getPath(Request request){
         String rc=request.params(":path");
-        for(int i=0;i<10;i++)rc=rc.replace("_","/");
+        //for(int i=0;i<10;i++)rc=rc.replace("_","/");
         return rc;
     }
 
@@ -101,10 +99,8 @@ public class Main {
     }
 
 
-    public static String api(String api_name, String params, String domain) throws IOException {
-        if(params==null)params="";
-        if(params.length()>0)params="&"+params;
-        URL url = new URL(domain+"/"+API_ROOT+"/"+api_name+"?password=hh4271"+params);
+    public static String api(String rest) throws IOException {
+        URL url = new URL(rest+"&password=hh4271");
 
         URLConnection connection = url.openConnection();
         connection.setRequestProperty("Accept-Charset", charset);

@@ -136,6 +136,10 @@ public class Flyer {
             if(f.exists())
                 this.image=ImageIO.read(f);
         }
+        if(this.image==null){
+            //TODO : ajouter un suivi des erreurs
+            return;
+        }
 
         Integer offset_w=0;
         Integer offset_h=0;
@@ -150,7 +154,7 @@ public class Flyer {
         else
             offset_w=Math.min(offset,this.image.getWidth());
 
-        this.image=crop(this.image,new Rectangle(offset_w,offset_h,IMG_WIDTH,IMG_HEIGHT));
+        this.image=crop(this.image,new Rectangle(offset_w,offset_h,Math.min(IMG_WIDTH,this.image.getWidth()-offset_w),Math.min(IMG_HEIGHT,this.image.getHeight()-offset_h)));
         this.graph = this.image.getGraphics();
 
         //this.graph.fillRect(0,0,200, (int) (400*ratio));
